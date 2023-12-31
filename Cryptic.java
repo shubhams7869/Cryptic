@@ -1,18 +1,19 @@
-// Online Java Compiler
-// Use this editor to write, compile and run your Java code online
 import java.util.*;
+
 class Cryptic {
     public static void main(String[] args) {
-        String msg="ShubhamS@=======";
+        /*String msg="ShubhamS@=======";
         String secret="Sun==";
         String eMsg="k1I1O%1Ms1N51f1m1H1h1d",dMsg;
-        /*
+        */
+        String eMsg,dMsg;
+        
         Scanner input = new Scanner(System.in);
         System.out.print("Enter Message to encrypt: ");
         String msg=input.next();
         System.out.print("Enter secret : ");
         String secret=input.next();
-        */
+        
         eMsg=encryptMsg(msg,secret);
         System.out.println("Encrypted message : "+eMsg);
         dMsg=decryptMsg(eMsg,secret);
@@ -69,7 +70,7 @@ class Cryptic {
             c=eMsg.charAt(i);
             if(Character.isDigit(c)) {
                 num=c-'0';
-                if(!Character.isDigit(eMsg.charAt(i+1)))
+                if(i<eMsg.length()-1 && !Character.isDigit(eMsg.charAt(i+1)))
                     continue;
                 else num=0;
             }

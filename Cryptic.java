@@ -33,11 +33,8 @@ class Cryptic {
             secrInd=ltrlList.indexOf(secret.charAt(secInd)); //index of secret char in ltrlList
             msgInd=ltrlList.indexOf(c); //index of message char in ltrlList
             
-            tempInd=secrInd+msgInd; //index of encrypted char in ltrlList            
-            num=tempInd/(ltrlList.length()-1); //check if the tempInd is greater than ltrlList size            
-            tempChar=Character.forDigit(num,10);
+            tempInd=secrInd+msgInd; //index of encrypted char in ltrlList
             
-            if(tempChar>'0')encr.append(tempChar); //Add the number (if greater than 0) to the final string 
             ch=tempInd%(ltrlList.length()-1);
             tempChar=ltrlList.charAt(ch);
             encr.append(tempChar); // Adds the ecrypted char to the Final String
@@ -51,31 +48,21 @@ class Cryptic {
         StringBuilder decr = new StringBuilder();
         char tempChar=0,c;
         int msgInd=0,secrInd,secInd=0;
-        int tempInd=0,num=0;
+        int tempInd=0;
         //Alphabets [65-90][97-122]
         //Numbers [48-57]
         System.out.println("Decryption started...");
         for(int i=0;i<eMsg.length();i++){
             c=eMsg.charAt(i);
-            // checks for number and handles accordingly
-            if(Character.isDigit(c)) {
-                num=c-'0';
-                if(i<eMsg.length()-1 && !Character.isDigit(eMsg.charAt(i+1)))
-                    continue;
-                else num=0;
-            }
-            
-            tempInd=num*(ltrlList.length()-1);
             
             secrInd=ltrlList.indexOf(secret.charAt(secInd)); //index of secret char in literal
             msgInd=ltrlList.indexOf(c); //index of message char in literal
 
-            tempInd=tempInd+msgInd-secrInd;
+            tempInd=msgInd<secrInd?(ltrlList.length()-1)+msgInd-secrInd:msgInd-secrInd;
             
             tempChar=ltrlList.charAt(tempInd);
             decr.append(tempChar);
             secInd=secInd<secret.length()-1?secInd+1:0;
-            num=0;
         }
         return decr.toString();
     }
